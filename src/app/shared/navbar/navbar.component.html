@@ -17,9 +17,9 @@
         <div class="dropdown">
           <a class="nav-link dropdown-toggle pointer d-inline pr-1" id="UserDropdown" data-toggle="dropdown" aria-expanded="false"
             aria-haspopup="false" flip="false">
-            <span class="profile-text"> Hola, {{ userProfile.nombre }}!</span>
+            <span *ngIf="userProfile" class="profile-text"> Hola, {{ userProfile.nombre }}!</span>
           </a>
-          <img class="img-xs rounded-circle d-inline" src="{{ userProfile.photoURL }}" alt="Profile image">
+          <img *ngIf="userProfile" class="img-xs rounded-circle d-inline" src="{{ userProfile.photoURL }}" alt="Profile image">
           <div id="drop-user-menu" class="dropdown-menu" aria-labelledby="UserDropdown">
             <a class="dropdown-item" (click)="picProfileChanger.click()" >Cambiar imagen de perfil</a>
           </div>

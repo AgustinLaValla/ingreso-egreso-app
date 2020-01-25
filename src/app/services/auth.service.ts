@@ -12,6 +12,7 @@ import { ActivarLoadingAction, DesactivarLoading } from '../shared/ui.actions';
 import { setUserAction, unsetUserAction } from '../auth/auth.actions';
 import { Subscription } from 'rxjs';
 import { IngresoEgresoService } from './ingreso-egreso.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -97,17 +98,18 @@ export class AuthService {
   //Logout
   logout() { 
     this.router.navigate(['/login']);
-    this.afa.auth.signOut();
+    this.afa.auth.signOut().then(() => this.ingresoEgresoService.cancelarSubscripciones());
     this.store.dispatch( new unsetUserAction())
   }
 
 
   getCurrentState() { 
-    if(!isNullOrUndefined(this.authState)){
-      return true;
-    }else{
-      false;
-    }
+    return this.afa.authState.pipe(map(user => {
+      if(user === null) {
+        this.router.navigate(['/login'])
+      }
+      return user != null
+    }))
   }
 
   getUsuario(): User { 

@@ -5,6 +5,7 @@ import { AppState } from 'src/app/app.reducer';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { IngresoEgresoService } from 'src/app/services/ingreso-egreso.service';
+import { unsetItemsAction } from 'src/app/ingreso-egreso/ingreso-egreso.actions';
 
 @Component({
   selector: 'app-sidebar',
@@ -27,7 +28,8 @@ export class SidebarComponent implements OnInit {
 
   logout(){ 
     this.auth.logout();
-    this.ingresoEgresoService.cancelarSubscripciones();
+    
+    this.store.dispatch(new unsetItemsAction());
   }
 
 }

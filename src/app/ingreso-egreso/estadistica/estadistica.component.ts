@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
+// import { AppState } from 'src/app/app.reducer';
+import * as fromIE from '../ingreso-egreso.reducer';
 import { map } from 'rxjs/operators';
 import { IngresoEgreso } from 'src/app/models/ingreso-egreso.model';
 import { Subscription } from 'rxjs';
@@ -29,7 +30,7 @@ export class EstadisticaComponent implements OnInit, OnDestroy {
   public doughnutChartData: MultiDataSet = [];
   public doughnutChartType: ChartType = 'doughnut';
 
-  constructor(private store:Store<AppState>) { }
+  constructor(private store:Store<fromIE.App_State>) { }
 
   ngOnInit() {
     this.IE_subs = this.store.select('IE').pipe(map(IEdata => IEdata.items)).subscribe((IE: IngresoEgreso[])=>{

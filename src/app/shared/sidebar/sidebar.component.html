@@ -5,11 +5,11 @@
           
           <div class="user-wrapper">
             <div class="profile-image">
-              <img src="{{ userProfile.photoURL }}" alt="profile image">
+              <img *ngIf="userProfile" src="{{ userProfile.photoURL }}" alt="profile image">
             </div>
             
             <div class="text-wrapper">
-              <p class="profile-name">{{ userProfile.nombre }}</p>
+              <p *ngIf="userProfile" class="profile-name">{{ userProfile.nombre }}</p>
               <div>
                 <small class="designation text-muted">Usuario</small>
               </div>
